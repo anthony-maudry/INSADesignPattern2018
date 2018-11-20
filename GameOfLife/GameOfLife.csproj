@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmEvent.cs" />
     <Compile Include="GameConfiguration\IGameConfiguration.cs" />
     <Compile Include="GameConfiguration\ConwayGameConfiguration.cs" />
     <Compile Include="GameConfiguration\SimpleGameConfiguration.cs" />
@@ -140,6 +141,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Events\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

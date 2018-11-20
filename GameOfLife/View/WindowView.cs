@@ -14,6 +14,8 @@ namespace GameOfLife.View
 {
     public class WindowView
     {
+        public event EventHandler UserEntryStop;
+
         private readonly IGameConfiguration configuration;
 
         static void OnClose(object sender, EventArgs e)
@@ -33,6 +35,7 @@ namespace GameOfLife.View
             // Create the main window
             RenderWindow app = new RenderWindow(new VideoMode(1000, 1000), "SFML Works!");
             app.Closed += new EventHandler(OnClose);
+            app.KeyPressed += Window_KeyPressed;
 
             Color windowColor = Color.Green;
 
@@ -47,6 +50,13 @@ namespace GameOfLife.View
             };
 
             grid.Init();
+
+            bool stop = false;
+
+            configuration.LifeAlgorithm.OnStabilized += (s, e) => { stop = true; };
+            configuration.LifeAlgorithm.OnOverCrowded += (s, e) => { stop = true; };
+            configuration.LifeAlgorithm.OnSterilized += (s, e) => { stop = true; };
+            UserEntryStop += (s, e) => { stop = true; };
 
             // Start the game loop
             while (app.IsOpen)
@@ -68,12 +78,22 @@ namespace GameOfLife.View
                     // Update the window
                     app.Display();
                 }
+
+                if (stop)
+                {
+                    app.Close();
+                }
             } //End game loop
         }
 
         private void Window_KeyPressed(object sender, KeyEventArgs e)
         {
-
+            switch (e.Code)
+            {
+                case Keyboard.Key.Return:
+                    UserEntryStop?.Invoke(sender, new EventArgs());
+                    break;
+            }
         }
     }
 }
