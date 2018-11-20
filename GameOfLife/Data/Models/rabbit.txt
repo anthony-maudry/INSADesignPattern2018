@@ -1,0 +1,17 @@
+﻿     OO     OO
+    O  O   O  O
+    O  O   O  O
+    O  O   O  O
+    O  O   O  O
+    O  O   O  O
+   OOOOOOOOOOOOO
+  O   O     O   O
+  O  O O   O O  O
+ O   OOO   OOO   O
+ O               O
+  OOOOO     OOOOO
+ O     O O O     O
+  OOOOOOO OOOOOOO
+       O O O
+	   O O O
+	    OOO
