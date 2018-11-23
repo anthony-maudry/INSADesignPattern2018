@@ -12,6 +12,22 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +67,18 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>32416426C0B3DA767C561815E49817D296FEAF8F</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GameOfLife_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="sfmlnet-audio-2">
@@ -93,15 +121,30 @@
     <Compile Include="Model\LifeAlgorithm\FirstLifeAlgorithm.cs" />
     <Compile Include="Model\LifeAlgorithm\ILifeAlgorithm.cs" />
     <Compile Include="Model\LifeAlgorithm\LifeAlgorithmBase.cs" />
+    <Compile Include="Model\LifeAlgorithm\SecondLifeAlgorithm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\GridViewModel.cs" />
     <Compile Include="ViewModel\IDrawable.cs" />
+    <Compile Include="View\ConfigurationView.cs" />
+    <Compile Include="View\Configuration\AlgorithmChoiceEntry.cs" />
+    <Compile Include="View\Configuration\ChoiceUserEntry.cs" />
+    <Compile Include="View\Configuration\ConfigurationPartialViewBase.cs" />
+    <Compile Include="View\Configuration\FrameRateEntry.cs" />
+    <Compile Include="View\Configuration\GridWidthPartialView.cs" />
+    <Compile Include="View\Configuration\IConfigurationPartialView.cs" />
+    <Compile Include="View\Configuration\InitializationChoiceEntry.cs" />
+    <Compile Include="View\Configuration\InitializationFileChoiceEntry.cs" />
+    <Compile Include="View\Configuration\NumericalUserEntry.cs" />
+    <Compile Include="View\Configuration\AvailableEntry.cs" />
+    <Compile Include="View\Configuration\UserEntryBase.cs" />
     <Compile Include="View\DrawableView.cs" />
+    <Compile Include="View\GridHeightPartialView.cs" />
     <Compile Include="View\WindowView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="GameOfLife_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="csfml-audio-2.dll">
@@ -118,6 +161,12 @@
     </Content>
     <Content Include="csfml-window-2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Models\starship1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Models\line3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Models\empty.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -143,6 +192,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

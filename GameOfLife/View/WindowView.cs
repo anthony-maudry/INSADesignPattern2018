@@ -14,6 +14,7 @@ namespace GameOfLife.View
 {
     public class WindowView
     {
+        private enum StopReason { None, Stable, OverCrowded, Sterilized, User }
         public event EventHandler UserEntryStop;
 
         private readonly IGameConfiguration configuration;
@@ -52,11 +53,12 @@ namespace GameOfLife.View
             grid.Init();
 
             bool stop = false;
+            var reason = StopReason.None;
 
-            configuration.LifeAlgorithm.OnStabilized += (s, e) => { stop = true; };
-            configuration.LifeAlgorithm.OnOverCrowded += (s, e) => { stop = true; };
-            configuration.LifeAlgorithm.OnSterilized += (s, e) => { stop = true; };
-            UserEntryStop += (s, e) => { stop = true; };
+            configuration.LifeAlgorithm.OnStabilized += (s, e) => { stop = true; reason = StopReason.Stable; };
+            configuration.LifeAlgorithm.OnOverCrowded += (s, e) => { stop = true; reason = StopReason.OverCrowded; };
+            configuration.LifeAlgorithm.OnSterilized += (s, e) => { stop = true; reason = StopReason.Sterilized; };
+            UserEntryStop += (s, e) => { stop = true; reason = StopReason.User; };
 
             // Start the game loop
             while (app.IsOpen)
@@ -82,6 +84,24 @@ namespace GameOfLife.View
                 if (stop)
                 {
                     app.Close();
+                    switch(reason)
+                    {
+                        case StopReason.User:
+                            Console.WriteLine("You stoped the game !");
+                            break;
+                        case StopReason.Sterilized:
+                            Console.WriteLine("No one survived, too bad :'(");
+                            break;
+                        case StopReason.Stable:
+                            Console.WriteLine("And the world ends, smoothly, stabilized");
+                            break;
+                        case StopReason.OverCrowded:
+                            Console.WriteLine("We are all alive !");
+                            break;
+                        default:
+                            Console.WriteLine("Ok the world ended, but we do not know why. But who cares ?");
+                            break;
+                    }
                 }
             } //End game loop
         }
